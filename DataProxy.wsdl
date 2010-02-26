@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ejbs" xmlns:impl="http://ejbs" xmlns:intf="http://ejbs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsi="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <schema targetNamespace="http://ejbs" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://ejbs" xmlns:intf="http://ejbs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <element name="getDataResponse">
+    <complexType>
+     <sequence>
+      <element name="getDataReturn" nillable="true" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getData">
+    <complexType>
+     <sequence>
+      <element name="id" nillable="true" type="xsd:string"/>
+      <element name="info" nillable="true" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getDataRequest">
+
+      <wsdl:part element="impl:getData" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataResponse">
+
+      <wsdl:part element="impl:getDataResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="DataProxy">
+
+      <wsdl:operation name="getData">
+
+         <wsdl:input message="impl:getDataRequest" name="getDataRequest"/>
+
+         <wsdl:output message="impl:getDataResponse" name="getDataResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="DataProxySoapBinding" type="impl:DataProxy">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getData">
+
+         <wsdlsoap:operation soapAction="urn:dataproxy-getdata"/>
+
+         <wsdl:input name="getDataRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDataResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="DataProxyService">
+
+      <wsdl:port binding="impl:DataProxySoapBinding" name="DataProxy">
+
+         <wsdlsoap:address location="http://localhost:9081/WebServiceCachingWeb/services/DataProxy"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
