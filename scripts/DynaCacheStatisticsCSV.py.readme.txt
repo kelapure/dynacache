@@ -1,0 +1,23 @@
+ Dynacache flight recorder wsadmin script
+
+To debug problems or examine the performance characteristics of Dynacache over long runs, we use a wsadmin script to collect cache statistics exposed by the Dynacache mbean at a periodic interval. Looking at these statistics helps understand the state of the cache and troubleshoot  any performance issues in the operation of Dynacache. These statistics also help in tuning the cache and improving its effectiveness.
+
+For those customers interested in a deep-dive of cache internals and operations and a wsadmin script for monitoring Dynacache I have provided the script here. The overhead of the script is less than 1%. It is retrieving current cache statistics from the Dynacache mbean. It is acceptable to run this script in a production environment.
+
+The script accepts several parameters required and optional:
+ -nodeName      - The name of the server node. This parameter is required only if the server name is not unique in the cell.
+ -cacheInstance - The JNDI name of the cache instance for which statistics will be collected.  If not specified, statistics will be collected for the  base cache only.  "*" indicates all cache instances.
+ -sleepUnit     - The unit for sleep intervals.   Possible values: hours, minutes or seconds.  Default is seconds.
+ -sleepInterval - The number of sleep units between polls.  Default is 10.
+ -fileAppend    - If specified, statistics are appended to the file, if it already exists.  Otherwise, the file is recreated. optional
+ -csvSeparator  - The character used for the CSV field separator. Default is ",". optional
+
+Usage:
+./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py <SERVER_NAME> <LOG_FILE> "-nodeName <NODE_NAME> -cacheInstance <*|CACHE_INSTANCE_NAME> -sleepUnit <hours|minutes|seconds> -sleepInterval <SLEEP_UNITS> "
+
+Sample Usage:
+nohup ./wsadmin.sh -user -password -lang jython -f DynaCacheStatisticsCSV.py WC_wcsperf1 /wcsuser/scripts/dcmon/disk_cache_debug.log "-nodeName app11 -cacheInstance baseCache -sleepUnit minutes -sleepInterval 5" &
+
+WC_wcsperf1 is the server name, app11 is the node name and /wcsuser/scripts/dcmon/disk_cache_debug.log is the file that contains the recorded statistics.
+
+Please verify that the cache statistics file is being written too once the wsadmin script is kicked off. Once the test run is over suck the cache statistics log file into microsoft excel or open-office as a CSV file and graph the relevant statistics
