@@ -1,0 +1,3085 @@
+<?xml version="1.0" ?>
+<!DOCTYPE cache SYSTEM "cachespec.dtd">
+
+<cache>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/MyDefinedServlet</name>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/MyAnnotatedServlet</name>
+		<cache-id>
+			<timeout>3600</timeout>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/MyProgrammaticServlet</name>
+		<cache-id>
+			<timeout>3600</timeout>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/MyProgrammaticServlet2</name>
+		<cache-id>
+			<timeout>3600</timeout>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/MyProgrammaticServlet3</name>
+		<cache-id>
+			<timeout>3600</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/StartAsyncDispatchCompleteAltPath</name>
+		<cache-id>
+		    <component id="test" type="parameter">
+                <required>true</required>
+                <value>testDoNotConsume</value>
+            </component>
+			<property name="do-not-consume">true</property>
+			<timeout>5000</timeout>
+			<priority>2</priority>
+		</cache-id>
+        <cache-id>
+           <component id="test" type="parameter">
+                <required>true</required>
+                <value>testCacheChildONLY</value>
+            </component>
+			<property name="do-not-consume">true</property>
+            <timeout>5000</timeout>
+            <priority>2</priority>
+        </cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/StartAsyncDispatchComplete</name>
+		<cache-id>
+		   <component id="test" type="parameter">
+                <required>true</required>
+                <value>testDoNotConsume</value>
+            </component>
+			<property name="consume-subfragments">false</property>
+			<timeout>5000</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+           <component id="test" type="parameter">
+                <required>true</required>
+                <value>testConsumeSubFragments</value>
+            </component>
+            <property name="consume-subfragments">true</property>
+            <timeout>5000</timeout>
+            <priority>2</priority>
+        </cache-id>
+        <cache-id>
+           <component id="test" type="parameter">
+                <required>true</required>
+                <value>testTimeout</value>
+            </component>
+            <property name="do-not-consume">true</property>
+            <timeout>5000</timeout>
+            <priority>2</priority>
+        </cache-id>
+        <cache-id>
+           <component id="test" type="parameter">
+                <required>true</required>
+                <value>testError</value>
+            </component>
+            <property name="do-not-consume">true</property>
+            <timeout>5000</timeout>
+            <priority>2</priority>
+        </cache-id>
+ 	</cache-entry>
+ 	
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DiscardParent.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+	
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AttrA1.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AttrA2.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AttrA3.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<property name="save-attributes">
+			false
+			<exclude>saveThisAttr</exclude>
+		</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AttrC3.jsp</name>
+		<property name="do-not-cache">true</property>
+		<property name="save-attributes">false</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CacheTest.jsp</name>
+		<cache-id>
+			<component id="output" type="attribute">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+		</cache-id>
+		<dependency-id>
+			response
+			<component id="output" type="attribute">
+				<required>true</required>
+			</component>
+		</dependency-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>Include1.jsp</name>
+		<cache-id>
+			<component id="outputForInclude1" type="attribute">
+				<required>true</required>
+			</component>
+			<timeout>120</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>
+			response
+			<component id="output" type="attribute">
+				<required>true</required>
+			</component>
+		</dependency-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESIParent.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="parm1" type="parameter" />
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>
+			dep1
+			<component id="parm1" type="parameter" />
+		</dependency-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESIChild.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="parm2" type="parameter" />
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>
+			dep4
+			<component id="parm2" type="parameter" />
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI1Cached.jsp</name>
+		<cache-id>
+			<component id="param2" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI1</dependency-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI1Edgeable.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="param2" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI1</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI2Cached.jsp</name>
+		<cache-id>
+			<timeout>240</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI2</dependency-id>
+	</cache-entry>
+	<cache-entry>
+		<property name="EdgeCacheable">true</property>
+		<name>ESI2Edgeable.jsp</name>
+		<class>servlet</class>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI2</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI3Cached.jsp</name>
+		<cache-id>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI3</dependency-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI3Edgeable.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI3</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI4Edgeable.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI4</dependency-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI5Edgeable.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI5</dependency-id>
+	</cache-entry>
+
+
+	<!--Test ESI w/ wildcard character-->
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI6Edgeable.jsp</name>
+		<cache-id>
+			<component id="*" type="parameter">
+				<required>false</required>
+			</component>
+			<timeout>180</timeout>
+			<property name="EdgeCacheable">true</property>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>ESI7Edgeable.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>60</timeout>
+			<priority>2</priority>
+		</cache-id>
+		<dependency-id>ESI7</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>webservice</class>
+		<name>/services/CounterService1</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RequestHashTest</value>
+			</component>
+			<component id="Request-Hash" type="header">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+			<property name="description">
+				This is SOAP Servlet.
+			</property>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>SOAPActionTest</value>
+			</component>
+			<component id="" type="SOAPAction">
+				<value>urn:lookup</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>ServiceOperationTest</value>
+			</component>
+			<component id="" type="serviceOperation">
+				<value>urn:counterservice1:counter1</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>ServiceOperationParameterTest</value>
+			</component>
+			<component id="" type="serviceOperation">
+				<value>urn:counterservice1:counter1</value>
+			</component>
+			<component id="in" type="serviceOperationParameter">
+				<value>xxx</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>WSNotValueTest</value>
+			</component>
+			<component id="" type="serviceOperation">
+				<not-value>urn:counterservice1:counter1</not-value>
+			</component>
+			<component id="in" type="serviceOperationParameter">
+				<not-value>xxx</not-value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>WSLiteralTest</value>
+			</component>
+			<component id="" type="SOAPAction">
+				<value>urn:lookup</value>
+			</component>
+			<component id="Literal" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>WSHashTest</value>
+			</component>
+			<component id="" type="SOAPAction">
+				<value>urn:lookup</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>MultipleServicesTest</value>
+			</component>
+			<component id="" type="serviceOperation">
+				<value>urn:counterservice1:counter1</value>
+				<value>urn:counterservice2:counter2</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>WSInvalidationTest</value>
+			</component>
+			<component id="" type="serviceOperation">
+				<value>urn:counterservice1:counter1</value>
+			</component>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>depId</dependency-id>
+		<invalidation>
+			depId
+			<component id="test" type="parameter" ignore-value="true">
+				<value>WSInvalidationTest</value>
+			</component>
+			<component id="" type="serviceOperation"
+				ignore-value="true">
+				<value>urn:counterservice1:reset1</value>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>TimeoutPos.jsp</name>
+		<cache-id>
+			<timeout>10</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.servlet.pathinfo1.class</name>
+		<cache-id>
+			<component id="" type="pathinfo">
+				<required>true</required>
+			</component>
+			<component id="genPathInfo" type="parameter">
+				<required>false</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.servlet.pathinfo2.class</name>
+		<cache-id>
+			<component id="" type="pathinfo">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/pathinfo1/xxxx</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>/pathinfo1/yyyy</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<sharing-policy>shared-pull</sharing-policy>
+		<name>com.ibm.ws.cache.servlet.reqparmtest.class</name>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="timeout" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>15</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			reqparm
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			reqparm
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<sharing-policy>shared-push</sharing-policy>
+		<name>
+			com.ibm.ws.cache.servlet.reqparmtest_sharePush.class
+		</name>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="timeout" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>15</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			reqparm
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			reqparm
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.servlet.reqattrtest.class</name>
+		<cache-id>
+			<component id="arg" type="attribute">
+				<required>false</required>
+			</component>
+			<component id="IAmRequired" type="attribute"
+				ignore-value="true">
+				<required>true</required>
+			</component>
+			<component id="int" type="attribute">
+				<method>intValue</method>
+				<required>false</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/STMTestServlet</name>
+		<sharing-policy>shared-push</sharing-policy>
+		<cache-id>
+			<component id="parm" type="parameter">
+				<required>false</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-instance name="services/cache/servletInstance_1">
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>/STMTestServlet_shareNone</name>
+			<sharing-policy>not-shared</sharing-policy>
+			<cache-id>
+				<component id="parm" type="parameter">
+					<required>false</required>
+				</component>
+				<timeout>0</timeout>
+				<priority>1</priority>
+			</cache-id>
+		</cache-entry>
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>/STMTestServlet_shareDefault</name>
+			<cache-id>
+				<component id="parm" type="parameter">
+					<required>false</required>
+				</component>
+				<timeout>0</timeout>
+				<priority>1</priority>
+			</cache-id>
+		</cache-entry>
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>/STMTestServlet_sharePush</name>
+			<sharing-policy>shared-push</sharing-policy>
+			<cache-id>
+				<component id="parm" type="parameter">
+					<required>false</required>
+				</component>
+				<timeout>0</timeout>
+				<priority>1</priority>
+			</cache-id>
+		</cache-entry>
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>/STMTestServlet_sharePull</name>
+			<sharing-policy>shared-pull</sharing-policy>
+			<cache-id>
+				<component id="parm" type="parameter">
+					<required>false</required>
+				</component>
+				<timeout>0</timeout>
+				<priority>1</priority>
+			</cache-id>
+		</cache-entry>
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>/STMTestServlet_sharePushPull</name>
+			<sharing-policy>shared-push-pull</sharing-policy>
+			<cache-id>
+				<component id="parm" type="parameter">
+					<required>false</required>
+				</component>
+				<timeout>0</timeout>
+				<priority>1</priority>
+			</cache-id>
+		</cache-entry>
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>SITimeStamp</name>
+			<cache-id>
+				<component id="parm" type="parameter" />
+				<timeout>180</timeout>
+				<priority>2</priority>
+			</cache-id>
+		</cache-entry>
+
+
+	</cache-instance>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CloseAndFlush</name>
+		<cache-id>
+			<component id="action" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/TimeStamp</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="timeout" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="inactivity0" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>30</timeout>
+			<inactivity>0</inactivity>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="inactivity1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>60</timeout>
+			<inactivity>30</inactivity>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="inactivity2" type="parameter">
+				<required>true</required>
+			</component>
+			<inactivity>30</inactivity>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="inactivity3" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>30</timeout>
+			<inactivity>60</inactivity>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<property name="ignore-get-post">false</property>
+			<component id="ignore" type="parameter">
+				<value>false</value>
+			</component>
+		</cache-id>
+		<cache-id>
+			<property name="ignore-get-post">true</property>
+			<component id="ignore" type="parameter">
+				<value>true</value>
+			</component>
+		</cache-id>
+		<dependency-id>
+			timestamp
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			timestamp
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/TimeStamp1</name>
+		<property name="persist-to-disk">false</property>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="timeout" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			timestamp
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			timestamp
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/TimeStamp2</name>
+		<property name="persist-to-disk">false</property>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="timeout" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			timestamp2
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			timestamp2
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-instance name="services/cache/servletInstance_1">
+		<cache-entry>
+			<class>command</class>
+			<name>com.ibm.ws.cache.command.MyQuoteCommand.class</name>
+			<cache-id>
+				<timeout>0</timeout>
+				<priority>3</priority>
+				<component id="getTicker" type="method" />
+			</cache-id>
+			<dependency-id>MyQuoteTicker</dependency-id>
+		</cache-entry>
+	</cache-instance> 
+	
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.QuoteCommand.class</name>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>3</priority>
+			<component id="getTicker" type="method" />
+		</cache-id>
+		<dependency-id>
+			ticker
+			<component id="getTicker" type="method" />
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.QuoteCommandComplex.class</name>
+		<cache-id>
+			<timeout>240</timeout>
+			<priority>3</priority>
+			<component id="getComplex" type="method">
+				<method>getTicker</method>
+			</component>
+		</cache-id>
+		<dependency-id>
+			ticker
+			<component id="getComplex" type="method">
+				<field>ticker</field>
+			</component>
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.QuoteCommandIdGen</name>
+		<cache-id>
+			<timeout>120</timeout>
+			<priority>3</priority>
+			<idgenerator>
+				com.ibm.ws.cache.command.QuoteIdGenerator
+			</idgenerator>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.NoOutputPropCommand</name>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>3</priority>
+			<component id="getTicker" type="method" />
+		</cache-id>
+		<dependency-id>
+			ticker
+			<component id="getTicker" type="method" />
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/bufferwritercached</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>3</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/bufferstreamcached</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>3</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/BasicServlet</name>
+		<cache-id>
+			<component id="testCookie" type="cookie">
+				<required>true</required>
+			</component>
+			<timeout>30</timeout>
+		</cache-id>
+		<cache-id>
+			<component id="action" type="parameter" />
+			<component id="" type="locale" />
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.WatchListCommand</name>
+		<cache-id>
+			<timeout>360</timeout>
+			<priority>4</priority>
+			<component id="userGroup" type="field" />
+			<component id="userNumber" type="field" />
+		</cache-id>
+		<dependency-id>
+			USER
+			<component id="userGroup" type="field" />
+			<component id="userNumber" type="field" />
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>com.ibm.ws.cache.command.WatchListCommandMixed</name>
+		<cache-id>
+			<timeout>360</timeout>
+			<priority>4</priority>
+			<component id="userGroup" type="field" />
+			<component id="getUserNumber" type="method" />
+		</cache-id>
+		<dependency-id>
+			USER
+			<component id="userGroup" type="field" />
+			<component id="getUserNumber" type="method" />
+		</dependency-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.command.CommandTestServlet.class</name>
+		<invalidation>
+			USER
+			<component id="action" type="parameter"
+				ignore-value="true">
+				<value>invalidate</value>
+			</component>
+			<component id="group" type="parameter" />
+			<component id="user" type="parameter" />
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>consumeParent.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>4</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>consumeParent2.jsp</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>4</priority>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>consumeParentForward.jsp</name>
+		<cache-id>
+			<timeout>0</timeout>
+			<priority>4</priority>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/esiForwardInclude.jsp</name>
+		<cache-id>
+			<property name="EdgeCacheable">true</property>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/esiParentConsume.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<property name="EdgeCacheable">true</property>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/alturlcontroller1</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AltUrlTest2.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<property name="alternate_url">/alturlcontroller2</property>
+		<cache-id>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AltUrlTest3.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<property name="alternate_url">/alturlcontroller3</property>
+		<cache-id>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AltUrlTest4.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<property name="alternate_url">/alturlcontroller4</property>
+		<cache-id>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/AltUrlTest5.jsp</name>
+		<cache-id>
+			<timeout>600</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.servlet.reqparmlisttest.class</name>
+		<cache-id>
+			<component id="parm" type="parameter-list">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SaveAttributesParent.jsp</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<property name="consume-subfragments">false</property>
+		<property name="save-attributes">false</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			timestamp
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			timestamp
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ReqAttA.jsp</name>
+		<cache-id>
+			<component id="ReqAttr" type="attribute">
+				<required>true</required>
+			</component>
+			<timeout>0</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ServletPathTest</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="" type="servletpath">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ESICookie.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ESIQueryStringParent.jsp</name>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ESIQueryStringChild.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="scenario" type="parameter">
+				<required>true</required>
+			</component>
+			<component id="parm1" type="parameter">
+				<required>true</required>
+			</component>
+			<component id="testCookie" type="cookie">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>com.ibm.ws.cache.servlet.IncludeTimeStamp.class</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<cache-id>
+			<component id="type" type="attribute">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>JAXRPCClient</class>
+		<name>
+			http://localhost:9080/dynacachetests/services/Counter
+		</name>
+		<cache-id>
+			<component
+				id="http://schemas.xmlsoap.org/soap/envelope/:Counter"
+				type="SOAPHeaderEntry" />
+			<timeout>0</timeout>
+		</cache-id>
+		<cache-id>
+			<component
+				id="http://schemas.xmlsoap.org/soap/envelope/:urn:headerNS:Counter"
+				type="SOAPHeaderEntry" />
+			<timeout>0</timeout>
+		</cache-id>
+		<cache-id>
+			<component id="" type="operation">
+				<value>
+					http://counter.webservices.cache.ws.ibm.com:counter1
+				</value>
+			</component>
+			<component id="in" type="part"></component>
+			<timeout>0</timeout>
+		</cache-id>
+		<cache-id>
+			<component id="Hash" type="SOAPEnvelope" />
+			<timeout>0</timeout>
+		</cache-id>
+		<dependency-id>
+			Counter_in
+			<component
+				id="http://schemas.xmlsoap.org/soap/envelope/:urn:headerNS:Counter"
+				type="SOAPHeaderEntry">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			Counter_in
+			<component
+				id="http://schemas.xmlsoap.org/soap/envelope/:urn:headerNS:Reset"
+				type="SOAPHeaderEntry">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+	<cache-entry>
+		<class>JAXRPCClient</class>
+		<name>
+			http://localhost:9080/dynacachetests/services/AddressBookBean
+		</name>
+		<cache-id>
+			<component id="" type="operation">
+				<value>
+					http://addr.webservices.cache.ws.ibm.com:getAddressFromName
+				</value>
+			</component>
+			<component id="name" type="part"></component>
+			<component id="country" type="part"></component>
+			<timeout>0</timeout>
+		</cache-id>
+		<dependency-id>
+			AddressBook
+			<component id="" type="operation" ignore-value="true">
+				<value>
+					http://addr.webservices.cache.ws.ibm.com:getAddressFromName
+				</value>
+				<required>true</required>
+			</component>
+			<component id="name" type="part">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			AddressBook
+			<component id="" type="operation" ignore-value="true">
+				<value>
+					http://addr.webservices.cache.ws.ibm.com:invalidate
+				</value>
+				<required>true</required>
+			</component>
+			<component id="name" type="part">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+	<cache-entry>
+		<class>JAXRPCClient</class>
+		<name>
+			http://localhost:9080/dynacachetests/services/StockQuote
+		</name>
+		<sharing-policy>shared-push</sharing-policy>
+		<cache-id>
+			<idgenerator>
+				com.ibm.ws.cache.webservices.stock.QuoteIdGenerator
+			</idgenerator>
+			<metadatagenerator>
+				com.ibm.ws.cache.webservices.stock.QuoteMetaDataGenerator
+			</metadatagenerator>
+			<priority>5</priority>
+		</cache-id>
+		<invalidation>
+			http://localhost:9080/dynacachetests/services/StockQuote
+			<invalidationgenerator>
+				com.ibm.ws.cache.webservices.stock.QuoteInvalidationGenerator
+			</invalidationgenerator>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/basic.do</name>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			struts
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			struts
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/forward.do</name>
+		<cache-id>
+			<property name="EdgeCacheable">true</property>
+			<component id="type" type="parameter">
+				<required>true</required>
+				<value>esiParentConsume</value>
+			</component>
+			<component id="JSESSIONID" type="cookie" />
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/strutsTimeStamp.jsp</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/STTimeStamp</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/child1.do</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stConsumeFragment.do</name>
+		<cache-id>
+			<component id="whoami" type="parameter">
+				<required>true</required>
+				<value>grandparent</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stConsumeParent.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stDNCFragment.do</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<component id="whoami" type="parameter">
+				<required>true</required>
+				<value>grandparent</value>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			DNC
+			<component id="whoami" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			DNC
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stDNCGrandChild.jsp</name>
+		<property name="do-not-consume">true</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stSaveAttrParent.do</name>
+		<property name="save-attributes">false</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/stDisplayInfo.jsp</name>
+		<cache-id>
+			<component id="lbean" type="session">
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileParent.jsp</name>
+		<cache-id>
+			<component id="type" type="parameter">
+				<required>true</required>
+				<value>strut</value>
+			</component>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileChild.jsp</name>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileChildServlet</name>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileEsiParent.jsp</name>
+		<cache-id>
+			<component id="type" type="parameter">
+				<value>edgeable</value>
+			</component>
+			<property name="EdgeCacheable">true</property>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileEsiChild.jsp</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<required>true></required>
+			</component>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileGrandParent.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileDNCGrandParent.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileCSFChild1.jsp</name>
+		<property name="do-not-consume">true</property>
+		<cache-id>
+			<component id="arg1" type="parameter">
+				<value>DNC</value>
+			</component>
+			<timeout>180</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			DNC
+			<component id="arg1" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			DNC
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/tileSaveAttrParent.jsp</name>
+		<property name="save-attributes">false</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/header.jsp</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/body.jsp</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/footer.jsp</name>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/testSTDefinition.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SavAttrParent/TrueExclude</name>
+		<property name="save-attributes">
+			true
+			<exclude>att1</exclude>
+		</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SavAttrParent/FalseExclude</name>
+		<property name="save-attributes">
+			false
+			<exclude>att1</exclude>
+		</property>
+		<cache-id>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DCP</name>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DCPParent</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DCPGrandParent</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-instance name="services/cache/servletInstance_CM" />
+
+	<cache-instance name="services/cache/servletInstance_2">
+		<cache-entry>
+			<class>servlet</class>
+			<name>/TimeStampCM2</name>
+			<sharing-policy>not-shared</sharing-policy>
+			<cache-id>
+				<component id="arg1" type="parameter">
+					<required>true</required>
+				</component>
+			</cache-id>
+		</cache-entry>
+	</cache-instance>
+
+	<cache-instance name="services/cache/servletInstance_3">
+		<cache-entry>
+			<class>servlet</class>
+			<name>/TimeStampCM3</name>
+			<sharing-policy>not-shared</sharing-policy>
+			<cache-id>
+				<component id="arg1" type="parameter">
+					<required>true</required>
+				</component>
+			</cache-id>
+		</cache-entry>
+	</cache-instance>
+
+
+	<cache-instance name="services/cache/servletInstance_4">
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>ServletInstance_Esi1_ESIParent.jsp</name>
+			<property name="EdgeCacheable">true</property>
+			<cache-id>
+				<component id="parm1" type="parameter" />
+				<timeout>180</timeout>
+				<priority>2</priority>
+			</cache-id>
+			<dependency-id>
+				ci_dep1
+				<component id="parm1" type="parameter" />
+			</dependency-id>
+		</cache-entry>
+
+	</cache-instance>
+
+	<cache-instance name="services/cache/servletInstance_5">
+
+		<cache-entry>
+			<class>servlet</class>
+			<name>ServletInstance_Esi2_ESIChild.jsp</name>
+			<property name="EdgeCacheable">true</property>
+			<cache-id>
+				<component id="parm2" type="parameter" />
+				<timeout>180</timeout>
+				<priority>2</priority>
+			</cache-id>
+			<dependency-id>
+				ci_dep4
+				<component id="parm2" type="parameter" />
+			</dependency-id>
+		</cache-entry>
+
+	</cache-instance>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>JspRecompileTest.jsp</name>
+		<cache-id>
+			<component id="parm1" type="parameter" />
+			<timeout>180</timeout>
+			<priority>2</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DNCForwardServlet</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+				<value>test2</value>
+				<value>test3</value>
+				<value>test4</value>
+				<value>test6</value>
+				<value>test8</value>
+				<value>test10</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test5</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test7</value>
+				<value>test9</value>
+			</component>
+			<property name="EdgeCacheable">true</property>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DNCGrandParent.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+			</component>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test2</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test3</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test5</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<dependency-id>
+			DNC3
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<invalidation>
+			DNC3
+			<component id="inv3" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DNCParent1.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+				<value>test3</value>
+			</component>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test2</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test5</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<dependency-id>
+			DNC2
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<invalidation>
+			DNC2
+			<component id="inv2" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DNCChild1.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test3</value>
+			</component>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+				<value>test2</value>
+				<value>test4</value>
+				<value>test7</value>
+			</component>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test5</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test6</value>
+			</component>
+			<property name="EdgeCacheable">true</property>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test10</value>
+			</component>
+			<property name="EdgeCacheable">true</property>
+			<property name="do-not-consume">false</property>
+		</cache-id>
+
+		<dependency-id>
+			DNC1
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<invalidation>
+			DNC1
+			<component id="inv1" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/JSTLForwardServlet</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/JSTLChild1.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test1</value>
+			</component>
+			<property name="do-not-consume">true</property>
+		</cache-id>
+
+		<dependency-id>
+			JSTL1
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+
+		<invalidation>
+			JSTL1
+			<component id="inv1" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/PreviewServlet</name>
+		<property name="EdgeCacheable">true</property>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<priority>3</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/PreviewChildServlet</name>
+		<property name="EdgeCacheable">true</property>
+		<cache-id>
+			<priority>3</priority>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/IsUncacheable.jsp</name>
+		<cache-id>
+			<component id="cacheable" type="parameter">
+				<required>true</required>
+				<value>true</value>
+			</component>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/Afpa.jsp</name>
+		<property name="ExternalCache">afpa</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+
+
+
+
+	<!-- CacheMonitor CachePolicies Test entries -->
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CacheMonitorTestServletPolicy</name>
+		<sharing-policy>shared-push</sharing-policy>
+		<property name="EdgeCacheable">true</property>
+		<property name="ExternalCache">CMTextCache</property>
+
+		<cache-id>
+			<component id="CMTparameter" type="parameter" />
+			<component id="CMTsession" type="session" />
+		</cache-id>
+
+		<cache-id>
+			<component id="CMTcookie" type="cookie" />
+			<component id="CMTattribute" type="attribute" />
+		</cache-id>
+
+		<dependency-id>
+			<component id="CMTparameterList" type="parameter-list" />
+		</dependency-id>
+
+		<invalidation>
+			<component id="CMTservletPath" type="servletpath" />
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>command</class>
+		<name>/CacheMonitorTestCommandPolicy</name>
+		<sharing-policy>not-shared</sharing-policy>
+		<property name="ApplicationName">CMTAppName</property>
+		<property name="persist-to-disk">false</property>
+		<property name="delay-invalidations">true</property>
+
+		<cache-id>
+			<component id="CMTmethod" type="method" />
+		</cache-id>
+
+		<cache-id>
+			<component id="CMTfield" type="field" />
+		</cache-id>
+
+		<dependency-id>
+			<component id="CMTmethod" type="method" />
+		</dependency-id>
+
+		<invalidation>
+			<component id="CMTmethod" type="method" />
+		</invalidation>
+
+	</cache-entry>
+
+	<cache-entry>
+		<class>webservice</class>
+		<name>/CacheMonitorTestWebservicePolicy</name>
+		<sharing-policy>shared-push-pull</sharing-policy>
+		<property name="consume-subfragments">true</property>
+		<property name="do-not-consume">true</property>
+
+		<cache-id>
+			<component id="CMTSOAPEnvelope" type="SOAPEnvelope" />
+			<component id="CMTSOAPAction" type="SOAPAction" />
+		</cache-id>
+
+		<cache-id>
+			<component id="CMTserviceOperation" type="serviceOperation" />
+			<component id="CMTserviceOperationParameter"
+				type="serviceOperationParameter" />
+		</cache-id>
+
+		<dependency-id>
+			<component id="CMTserviceOperation" type="serviceOperation" />
+		</dependency-id>
+
+		<invalidation>
+			<component id="CMTSOAPEnvelope" type="SOAPEnvelope" />
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>portlet</class>
+		<name>/CacheMonitorTestPortletPolicy</name>
+		<sharing-policy>shared-pull</sharing-policy>
+		<property name="alternate_url">/CMTURL</property>
+		<property name="save-attributes">false</property>
+
+		<cache-id>
+			<component id="CMTheader" type="header" />
+			<component id="CMTpathInfo" type="pathInfo" />
+		</cache-id>
+
+		<cache-id>
+			<component id="CMTlocale" type="locale" />
+			<component id="CMTrequestType" type="requestType" />
+		</cache-id>
+
+		<dependency-id>
+			<component id="CMTrequestType" type="requestType" />
+		</dependency-id>
+
+		<invalidation>
+			<component id="CMTtilesAttribute" type="tiles_attribute" />
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/RangeTimeStamp.jsp</name>
+
+		<!-- some invalid specs.  should not be cached -->
+
+		<!-- RangeTest01: low is higher than high -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest01</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="20" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low isn't an integer, it's a string -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest02</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="toolow" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- high isn't an integer, it's a string -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest03</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="5" high="toohigh" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low isn't an integer, it's a decimal -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest04</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="1.5" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- high isn't an integer, it's a decimal -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest05</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="1" high="10.001" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low and high both missing -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest06</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range />
+				</value>
+			</component>
+		</cache-id>
+
+
+		<!-- valid specs, will be cached if they match -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest10</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>9</value>
+				<value>
+					<range low="-20" high="-10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest11</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>0</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest20</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<not-value>
+					<range low="-20" high="-10" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest21</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="-50" high="200" />
+				</value>
+				<not-value>
+					<range low="-20" high="-10" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest22</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="20" high="30" />
+				</value>
+				<not-value>
+					<range low="0" high="50" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest23</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="0" high="30" />
+				</value>
+				<not-value>
+					<range low="20" high="50" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest24</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="0" high="10" />
+				</value>
+				<value>
+					<range low="20" high="30" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest30</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+					<range low="25" high="100" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest31</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest32</value>
+			</component>
+			<component id="NoSuchParameterIsPresent" type="parameter">
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+				<required>false</required>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest33</value>
+			</component>
+			<component id="NoSuchParameterIsPresent" type="parameter">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest34</value>
+			</component>
+			<component id="NoSuchParameterIsPresent" type="parameter">
+				<required>true</required>
+			</component>
+		</cache-id>
+
+		<!--  35 & 36added by AKS to ensure support for defect 334361, case where required=false but violates cache policy-->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeTest35</value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>false</required>
+				<value>requiredValue</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<not-value>RangeTest36</not-value>
+			</component>
+			<component id="inputvalue" type="parameter">
+				<required>false</required>
+				<value>notThis</value>
+			</component>
+		</cache-id>
+
+		<!--
+			<dependency-id>
+			test
+			<component id="test" type="parameter">
+			<required>true</required>
+			</component>
+			</dependency-id>
+			<invalidation>
+			test
+			<component id="inv" type="parameter">
+			<required>true</required>
+			</component>
+			</invalidation>
+		-->
+
+	</cache-entry>
+
+	<!-- ############################################################ -->
+	<cache-entry>
+		<class>servlet</class>
+		<name>/RangeAttrChild.jsp</name>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest01</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="20" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low isn't an integer, it's a string -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest02</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="toolow" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- high isn't an integer, it's a string -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest03</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="5" high="toohigh" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low isn't an integer, it's a decimal -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest04</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="1.5" high="10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- high isn't an integer, it's a decimal -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest05</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="1" high="10.001" />
+				</value>
+			</component>
+		</cache-id>
+
+		<!-- low and high both missing -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest06</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range />
+				</value>
+			</component>
+		</cache-id>
+
+
+		<!-- valid specs, will be cached if they match -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest10</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>9</value>
+				<value>
+					<range low="-20" high="-10" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest11</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>0</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest20</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<not-value>
+					<range low="-20" high="-10" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest21</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="-50" high="200" />
+				</value>
+				<not-value>
+					<range low="-20" high="-10" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest22</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="20" high="30" />
+				</value>
+				<not-value>
+					<range low="0" high="50" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest23</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="0" high="30" />
+				</value>
+				<not-value>
+					<range low="20" high="50" />
+				</not-value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest24</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="0" high="10" />
+				</value>
+				<value>
+					<range low="20" high="30" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest30</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+					<range low="25" high="100" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest31</value>
+			</component>
+			<component id="RangeTestAttribute" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest32</value>
+			</component>
+			<component id="NO_SUCH_ATTRIBUTE" type="attribute">
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+				<required>false</required>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>RangeAttrTest33</value>
+			</component>
+			<component id="NO_SUCH_ATTRIBUTE" type="attribute">
+				<required>true</required>
+				<value>
+					<range low="12" high="50" />
+				</value>
+				<value>
+					<range low="25" high="100" />
+				</value>
+			</component>
+		</cache-id>
+
+		<dependency-id>
+			test
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			test
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+
+	<!-- ############################################################ -->
+
+	<skip-cache-attribute>prettypleaseskipcaching</skip-cache-attribute>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SkipCache1.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test01</value>
+			</component>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SkipCache2.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test02</value>
+			</component>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SkipCacheChild1.jsp</name>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/SkipCacheChild2.jsp</name>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<!-- ############################################################ -->
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CacheCookie1.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<value>test01</value>
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			test
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			test
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CacheCookie2.jsp</name>
+		<property name="store-cookies">
+			true
+			<exclude>cookie1</exclude>
+		</property>
+		<cache-id>
+			<component id="test" type="parameter">
+				<value>test02</value>
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			test
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			test
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/CacheCookie3.jsp</name>
+		<property name="store-cookies">
+			false
+			<exclude>cookie1</exclude>
+		</property>
+		<cache-id>
+			<component id="test" type="parameter">
+				<value>test03</value>
+				<required>true</required>
+			</component>
+			<timeout>35</timeout>
+			<priority>1</priority>
+		</cache-id>
+		<dependency-id>
+			test
+			<component id="test" type="parameter">
+				<required>true</required>
+			</component>
+		</dependency-id>
+		<invalidation>
+			test
+			<component id="inv" type="parameter">
+				<required>true</required>
+			</component>
+		</invalidation>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DoNotCacheParent.jsp</name>
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test01</value>
+				<value>test02</value>
+			</component>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>servlet</class>
+		<name>/DoNotCacheChild.jsp</name>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<value>test01</value>
+				<required>true</required>
+			</component>
+		</cache-id>
+		<cache-id>
+			<component id="test" type="parameter">
+				<value>test02</value>
+				<required>true</required>
+			</component>
+			<property name="do-not-cache">true</property>
+		</cache-id>
+
+	</cache-entry>
+
+	<!-- ############################################################ -->
+	<cache-entry>
+		<class>servlet</class>
+		<name>/ConsumeSubfragmentsExcludeParent.jsp</name>
+
+		<!-- Note: since the child jsps don't have their own
+			cache-entry's, they should never be cached themselves,
+			only as part of the parent result depending on this config -->
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test01</value>
+			</component>
+			<property name="consume-subfragments">
+				true
+				<exclude>/ConsumeSubfragmentsExcludeChild1.jsp</exclude>
+			</property>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test02</value>
+			</component>
+		</cache-id>
+
+		<cache-id>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>test03</value>
+			</component>
+			<property name="consume-subfragments">true</property>
+		</cache-id>
+	</cache-entry>
+
+	<!-- ############################################################ -->
+
+	<!--  Add for defect 309152 -->
+	<cache-entry>
+		<class>servlet</class>
+		<name>/static.jsp</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+	<cache-entry>
+		<class>static</class>
+		<name>/static.html</name>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>static</class>
+		<name>
+			com.ibm.ws.webcontainer.servlet.SimpleFileServlet.class
+		</name>
+		<cache-id>
+			<component id="" type="pathinfo">
+				<required>true</required>
+			</component>
+			<component id="useSFServlet" type="parameter">
+				<required>true</required>
+				<value>true</value>
+			</component>
+			<timeout>300</timeout>
+		</cache-id>
+	</cache-entry>
+
+	<cache-entry>
+		<class>static</class>
+		<name>/static2.html</name>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+	</cache-entry>
+
+  <cache-entry>
+		<class>servlet</class>
+		<name>/MultiIncludeParamRemoteServlet</name>
+		<property name="consume-subfragments">false</property>		
+		<cache-id>
+			<timeout>0</timeout>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>MultiIncludeParamRemoteServlet</value>
+			</component>
+		</cache-id>
+ </cache-entry>
+
+  <cache-entry>
+		<class>servlet</class>
+		<name>/MultiIncludeParamRemoteServlet</name>
+		<property name="consume-subfragments">false</property>		
+		<cache-id>
+			<timeout>0</timeout>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>MultiIncludeParamServlet</value>
+			</component>
+		</cache-id>
+ </cache-entry>
+
+  <cache-entry>
+		<class>servlet</class>
+		<name>/RemoteServlet</name>
+		<property name="consume-subfragments">false</property>
+		<property name="do-not-consume">true</property>    
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+ </cache-entry>
+  
+  <cache-entry>
+		<class>servlet</class>
+		<name>/RemoteServlet2</name>
+		<property name="consume-subfragments">true</property>
+		<cache-id>
+			<timeout>0</timeout>
+		</cache-id>
+ </cache-entry>
+
+  <cache-entry>
+		<class>servlet</class>
+		<name>/NonBlockingFragmentResponseServlet</name>
+		<property name="consume-subfragments">true</property>		
+		<cache-id>
+			<timeout>0</timeout>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>NonBlockingFragmentResponseServlet</value>
+			</component>
+		</cache-id>
+ </cache-entry>
+
+  <cache-entry>
+		<class>servlet</class>
+		<name>/BlockingFragmentResponseServlet</name>
+		<property name="consume-subfragments">false</property>		
+		<cache-id>
+			<timeout>0</timeout>
+			<component id="test" type="parameter">
+				<required>true</required>
+				<value>BlockingFragmentResponseServlet</value>
+			</component>
+		</cache-id>
+  </cache-entry>
+ 
+  <cache-entry>
+      <class>servlet</class>
+      <name>/JSTLIKEA.jsp</name>
+      <property name="consume-subfragments">true</property>
+      <cache-id>
+         <component id="test" type="parameter">
+         	<required>true</required>
+         	<value>test1</value>
+         </component>              
+      </cache-id>        
+  </cache-entry> 
+ </cache>
