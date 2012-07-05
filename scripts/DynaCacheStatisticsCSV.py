@@ -49,7 +49,7 @@ def DynaCacheStatistics (args):
 #------------------------------------------------------
 
 
-                        
+
         global AdminConfig
         global AdminControl
         numArgs = len(args)
@@ -82,10 +82,10 @@ def DynaCacheStatistics (args):
         fileAccess = "w+"
         csvSeparator = ","
         cacheInstanceSupported = "true"
-	cacheInstanceCtr = 0
-        
-      
-        
+        cacheInstanceCtr = 0
+
+
+
         #------------------------------------------------------
         # validate serverName
         #------------------------------------------------------
@@ -101,8 +101,6 @@ def DynaCacheStatistics (args):
                 print "\nError: Unrecognized server \"" + serverName + "\" specified."
                 return
         #endIf
-        
-        #------------------------------------------------------
         # iterate through optional arguments
         #------------------------------------------------------
         if (len(args) == 3):
@@ -191,7 +189,7 @@ def DynaCacheStatistics (args):
                             print " Value must be between 1 and 32767."
                             return
                         #endExcept
-                        
+
                         if (sleepInterval < 1 or sleepInterval > 32767):
                             print "\nError: Invalid value \"" + `sleepInterval` + "\" specified for -sleepInterval argument."
                             print " Value must be between 1 and 32767."
@@ -279,13 +277,13 @@ def DynaCacheStatistics (args):
         print " sleepInterval= " + `sleepInterval`
         print " sleepMilliseconds= " + `sleepMilliseconds`
         print " fileAppend= " + fileAppend
-        
+
         #----------------------------------------------------------
         # find Dynacache MBean
         #----------------------------------------------------------
         queryString = "type=DynaCache,process=" + serverName + nodeSpecification + ",*"
         mbean = AdminControl.queryNames(queryString)
-             
+
         #----------------------------------------------------------
         # validate instanceName
         #----------------------------------------------------------
@@ -312,9 +310,9 @@ def DynaCacheStatistics (args):
         if (fileAppend == "true"):
             printNames = "false"
         #endIf
-     
+
         while (0 == 0):
-                
+
                 #----------------------------------------------------------
                 # invoke method on MBean
                 #----------------------------------------------------------
@@ -352,19 +350,19 @@ def DynaCacheStatistics (args):
                         values = cacheInstance + csvSeparator + timestamp
                         stats = AdminControl.invoke(mbean, "getAllCacheStatistics", cacheInstance).split(linesep)
                         if (cacheInstanceCtr == 0 and printNames == "true"):
-								names = "CacheInstanceName" + csvSeparator + "Timestamp"
+                            names = "CacheInstanceName" + csvSeparator + "Timestamp"
                         for stat in stats:
-							if (cacheInstanceCtr == 0 and printNames == "true"):
-								nameValuePair = stat.split('=')
-								names = names + csvSeparator + nameValuePair[0]
-								values = values + csvSeparator + nameValuePair[1]
-							else:
-								nameValuePair = stat.split('=')
-								values = values + csvSeparator + nameValuePair[1]
-							#endIf
+                            if (cacheInstanceCtr == 0 and printNames == "true"):
+                                nameValuePair = stat.split('=')
+                                names = names + csvSeparator + nameValuePair[0]
+                                values = values + csvSeparator + nameValuePair[1]
+                            else:
+                                nameValuePair = stat.split('=')
+                                values = values + csvSeparator + nameValuePair[1]
+
                         if (cacheInstanceCtr == 0 and printNames == "true"):
                             contents = names + "\n"
-						#endIf
+
                         contents = contents + values + "\n"
                         cacheInstanceCtr += 1
                         printNames = "false"
@@ -379,7 +377,7 @@ def DynaCacheStatistics (args):
                     print "\nError: Could not open/write to file \"" + fileName + "\"."
                     return
                 #endTry
-                
+
                 fileAccess = "a"
 
                 #----------------------------------------------------------
@@ -396,9 +394,9 @@ def DynaCacheStatistics (args):
         #endWhile
 
         return
-        
+
 #endDef
-           
+
 def usage ():
         print "\n DynaCacheStatistics"
         print "\n Description: Polls cache statistics."
@@ -427,7 +425,7 @@ def usage ():
         print "\n DynaCacheStatistics server1 xyz.txt \"-cacheInstance *\""
         print "\n DynaCacheStatistics server1 xyz.txt \"-cacheInstance inst1\""
 #endDef
-       
+
 #-----------------------------------------------------------------
 # Main - DynaCacheStatistics.jacl
 #-----------------------------------------------------------------
