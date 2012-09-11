@@ -7,7 +7,7 @@
 # Bertrand Fayn 30/11/2006 - output format changed to CSV
 # Hendrik van Run 24/03/2009 - changed default CSV separator to "," and added support for multiple cache instances
 # Deb Banerjee Aug 01, 2012 -- WXS cache treatment, enhancememt, bug fixes, and extensive simplification
-# Deb Banerjee Sept, 2012 --   futher enhanecment and consumability improvement
+# Deb Banerjee Sept, 2012 --   filter introduction, futher enhanecment and consumability improvements
 # *******************************************************************************************************************
 
 #----------------------------------------------------------------------------------
@@ -37,13 +37,17 @@
 # -sleepInterval - The number of sleep units between polls. Default is 10.
 # -fileAppend - If specified, statistics are appended to the file, if it already exists. Otherwise, the file is recreated.
 # -csvSeparator - The character used for the CSV field separator. Default is ",".
+# -cacheType - An optional filter on caches. A single character should be specified as its value. A value of w or W or m or M
+# specifies WXS DynaCache, whereas a value of t or T specified traditional Dynacache. By default there cache filtering is
+# turned off. The filter can be conveniently used with the 'cacheInstance' parameter. A parameter combination 
+# "-cacheInstance * -cacheType w" will collect statistics for all the configured WXS DynaCache instances in the environment   
 #
 # Examples:
 # DynaCacheStatistics server1 abc.txt "-sleepInterval 15 -fileAppend"
 # DynaCacheStatistics server1 xyz.txt "-sleepUnit hours -sleepInterval 1"
 #
 # NOTES: 
-# 1. The script is pouplarlu used as a flight recorder in WebSphere Commerce Environment using DynaCache, especially in the 
+# 1. The script is popularly used as a flight recorder in WebSphere Commerce Environment using DynaCache, especially in the 
 # commerce installations using WXS DynaCache. For WXS DynaCache, presently this Client-Side Flight Recorder (CFR) outputs the 
 # following MBean statistics in the order as shown here.
 # CacheHits CacheMisses CacheLruRemoves CacheRemoves ExplicitInvalidationsFromMemory MemoryCacheEntries MemoryCacheSizeInMB 
