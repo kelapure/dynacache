@@ -8,6 +8,7 @@
 # Hendrik van Run 24/03/2009 - changed default CSV separator to "," and added support for multiple cache instances
 # Deb Banerjee Aug 01, 2012 -- WXS cache treatment, enhancememt, bug fixes, and extensive simplification
 # Deb Banerjee Sept, 2012 --   filter introduction, futher enhanecment and consumability improvements
+# Deb Banerjee Oct, 2012  --   bug fix, generalization, and simplification
 # *******************************************************************************************************************
 
 #----------------------------------------------------------------------------------
@@ -72,10 +73,11 @@
 #
 # 4. The optional parameters to the client-side flight recorder sript can be provided in any order.
 #
-
+#
 # Examples of invocations in WAS:
 # ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py server1 MyDynaCacheStatistics.txt
 # ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py server1 MyDynaCacheStatistics.txt “-sleepUnit minutes -sleepInterval 30" 
+# ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py myServer MyDynaCacheStatistics.txt “-nodeName myNode -sleepUnit minutes -sleepInterval 30" 
 # ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py server1 MyDynaCacheStatistics.txt “-cacheInstance baseCache”
 # ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py cluster_member1 MyDynaCacheStatistics.txt “-cacheInstance *”
 # ./wsadmin.sh -lang jython -f DynaCacheStatisticsCSV.py server1 MyDynaCacheStatistics.txt “-cacheInstance baseCache –sleepUnit seconds -sleepInterval 30”
@@ -87,10 +89,15 @@
 import java
 import sys
 
+from jarray import array
+from java.lang import String
+from java.lang import Object
+from jarray import array
+
 linesep = java.lang.System.getProperty('line.separator')
 
 #----------------------------------------------------------------------------------
-# checks whether it a traditiona or modern (wxs) DynaCache implementation
+# checks whether it a traditional or modern (wxs) DynaCache implementation
 #-----------------------------------------------------------------------------------
 def isModernDynaCache(mbean, cacheInstance):
 	modernMarker = "com.ibm.websphere.xs.dynacache.remote_hits"
@@ -365,10 +372,30 @@ def DynaCacheStatistics (args):
         # print " fileAppend= " + fileAppend
         
         #----------------------------------------------------------
-        # find Dynacache MBean
+        # locate the Dynacache MBean
         #----------------------------------------------------------
         queryString = "type=DynaCache,process=" + serverName + nodeSpecification + ",*"
         mbean = AdminControl.queryNames(queryString)
+
+
+	# Following are the variables needed for invoking the getCacheStatistics() method of the DynaCache MBean. The invocation of 
+	# the getCacheStatistics() method needs the names of the desired statistics counters. The names are passed in the 'instances' 
+	# jython list. The names are passed so that the values of the corresponding counters from the call get returned in the same 
+	# order. Note the first two variables are WAS instance (JVM) scoped while the rest are global cache scoped. This is not the 
+	# default order in which statistcs gets returned from the getAllCacheStatistics() invocation.  
+	#
+	# The present approach of not invoking the getAllCacheStatistics() method is sound. There is no gurantee that the statistics 
+	# counters will always be returned in a specific order by the getAllCacheStatistics() invocation, so that one can manipulate 
+	# the returned list to the desired order -- first JVM-scoapd followed by gloablly scoped entities.  
+	#
+	# All these variables will be used later during actual MBean method invocation 
+        mbeanForjmx = AdminControl.makeObjectName(mbean)
+        instances = ["CacheHits", "CacheMisses", "CacheLruRemoves", "CacheRemoves", "ExplicitInvalidationsFromMemory", "MemoryCacheEntries", "MemoryCacheSizeInMB", 
+        "TimeoutInvalidationsFromMemory", "com.ibm.websphere.xs.dynacache.remote_hits", "com.ibm.websphere.xs.dynacache.remote_misses"]
+        instancesArray = array(instances, java.lang.String)
+        # the signature of the parameter that will be passed to the mbean getCacheStatistics() method
+        signature = array(["java.lang.String", "[Ljava.lang.String;"], String)
+   
              
         #----------------------------------------------------------
         # validate instanceName and fill up the cache instances (names)
@@ -534,16 +561,22 @@ def DynaCacheStatistics (args):
                         # -----------------------------------------------------------------------------------------------------------
                         # Actual MBean invocation. Note that different MBean methods are invoked based on the type of the cache. 
                         # This is done for easier interpretation of the generated CSV file. 
-                        # For modern (WXS) DynaCache, we would like to have the two application server-scoped statistics as the first
-                        # two elements in the CSB file. This is not the default order in which stats gets returned from the 
-                        # getAllCacheStatistics() invocation.
+                        # As discussed earlier, for modern (WXS) DynaCache, we would like to have the two application server-scoped 
+                        # statistics as the first two elements in the CSB file. This is not the default order in which stats gets 
+                        # returned from the getAllCacheStatistics() invocation.
                         # -----------------------------------------------------------------------------------------------------------
                         if (cacheTypes[cacheInstanceCtr] == 1):
-                        	# a modern DynaCache
-                   		stats = AdminControl.invoke(mbean, 'getCacheStatistics', '\"CacheHits CacheMisses CacheLruRemoves CacheRemoves ExplicitInvalidationsFromMemory MemoryCacheEntries MemoryCacheSizeInMB TimeoutInvalidationsFromMemory com.ibm.websphere.xs.dynacache.remote_hits com.ibm.websphere.xs.dynacache.remote_misses\"').split(linesep)
+                               	params = array([cacheInstance, instancesArray], Object) 
+                               	result = AdminControl.invoke_jmx(mbeanForjmx, 'getCacheStatistics', params, signature) 
+                               	                               	
+                               	# parse the returned 'result' of type org.python.core.PyArray and place it in a jython list 
+                               	# for further processing
+                               	stats = []
+                               	for elem in result:
+                               		stats.append(elem)
                         else:
                    		stats = AdminControl.invoke(mbean, 'getAllCacheStatistics', cacheInstance).split(linesep)	
-
+                   		
                         if (firstCacheListTraversal == 1):
                         	# initialise names buffer
                         	names = "CacheInstanceName" + csvSeparator + "TimeStamp" + csvSeparator + "Date" + csvSeparator + "Time"  	
@@ -641,6 +674,7 @@ def usage ():
         print "\n A Few Examples:"
         print "\n DynaCacheStatistics server1 abc.txt \"-sleepInterval 15 -fileAppend\""
         print "\n DynaCacheStatistics server1 abc.txt \"-sleepUnit minutes -sleepInterval 30\""
+        print "\n DynaCacheStatistics server1 abc.txt \"-nodeName myNode -sleepUnit minutes -sleepInterval 30\""
         print "\n DynaCacheStatistics server1 xyz.txt \"-sleepUnit hours -sleepInterval 1\""
         print "\n DynaCacheStatistics server1 xyz.txt \"-cacheInstance *\""
         print "\n DynaCacheStatistics server1 xyz.txt \"-cacheInstance * -cacheType m\""
